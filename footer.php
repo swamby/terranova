@@ -65,7 +65,7 @@
             sportsnews24@contattaci.it
           </p>
           <p><i class="fas fa-phone me-3"></i>+ 333 121 0012</p>
-          <p><i class="fas fa-print me-3"></i>+ 0564 41729</p>
+          <p><i class="fas fa-print me-3"></i>+48 124004695</p>
         </div>
       </div>
     </div>

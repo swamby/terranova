@@ -4,9 +4,46 @@ from newsapi import NewsApiClient
 app = Flask(__name__)
 newsapi = NewsApiClient(api_key='e3a56dec62e7409683a14531a9dae0cc')
 
-@app.route('/')
+@app.route('/',
+endpoint='home')
 def home():
     top_headlines = newsapi.get_top_headlines(
                                           language='it',
                                           country='it')
     return render_template('index.html', top_headlines=top_headlines)
+
+@app.route('/sport',
+endpoint='sport')
+def sport():
+    newssport = newsapi.get_top_headlines(
+                                    language='it',
+                                    country='it',
+                                    category='sports')
+    return render_template('sport.html', newssport=newssport)
+
+@app.route('/business',
+endpoint='business')
+def buisness():
+    newsbusiness = newsapi.get_top_headlines(
+                                    language='it',
+                                    country='it',
+                                    category='business')
+    return render_template('business.html', newsbusiness=newsbusiness)
+
+@app.route('/intrattenimento',
+endpoint='intrattenimento')
+def intrattenimento():
+    newsintrattenimento = newsapi.get_top_headlines(
+                                    language='it',
+                                    country='it',
+                                    category='entertainment')
+    return render_template('intrattenimento.html', newsintrattenimento=newsintrattenimento)
+
+@app.route('/scienza',
+endpoint='scienza')
+def scienza():
+    newsscienza = newsapi.get_top_headlines(
+                                    language='it',
+                                    country='it',
+                                    category='science')
+    return render_template('scienza.html', newsscienza=newsscienza)

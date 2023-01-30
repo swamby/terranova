@@ -47,3 +47,17 @@ def scienza():
                                     country='it',
                                     category='science')
     return render_template('scienza.html', newsscienza=newsscienza)
+
+@app.route("/search", methods=["POST"])
+def search():
+    q = request.form['search']
+    searchnews = newsapi.get_everything(
+                                            language='it',
+                                            q=q)
+    return render_template('search.html', searchnews=searchnews)
+
+@app.route("/prova", methods=["GET"])
+def prova():
+    category = request.args.get('prova')
+    prova = newsapi.get_top_headlines(category=category,language='it')
+    return render_template('prova.html',prova=prova)

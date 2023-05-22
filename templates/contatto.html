@@ -24,6 +24,7 @@
         crossorigin="anonymous"></script>
     <script type="text/javascript" src="carousel.js"></script>
 
+
     <div class="w-100 d-flex flex-column shadow p-2 mb-4 bg-white rounded">
         <div class="d-flex flex-row justify-content-between align-items-center">
             <div class="float-start" style="width: 33%;">
@@ -73,96 +74,29 @@
 
         </div>
     </div>
-    <div class="container mt-1 shadow p-3 mb-5 bg-white rounded">
-        <div class="row">
-            <div class="col-8 m-1 divdes">
-                <center>
-                    <br>
-                    <h4>
-                        Notizie Principali
-                    </h4>
-                </center>
-                <br>
-                {% set k = namespace(value=0) %}
-                {% for article in top_headlines['articles'] %}
-                {% if article['urlToImage'] is not none %}
-                {% set k.value = k.value+1 %}
-                {% if k.value|int <= 10 %} <div class="news">
-                    <img src="{{article['urlToImage']}}" width="500" height="250" alt="Your Image" class="newsimg">
-                    <div style="display:block;">
-                        <a href="{{article['url']}}">
-                            <h5 class="newstitle1">{{article['title']}}</h5>
-                            <h6 class="newstitle1">{{article['description']}}</h6>
-                            <a
-                                href="save?title={{article['title']}}&description={{article['description']}}&url={{article['url']}}&urlToImage={{article['urlToImage']}}&publishedAt={{article['publishedAt']}}">
-                            
-                                <img src="{{url_for('static',
-                                        filename='img/save.jpg')}}" alt="" style="width: 30px; height: 30px"><br><br>
-                                    </a>
-                                <p class="newspub">{{article['publishedAt']|format_datetime}}</p>
-
-
-                    </div>
-            </div>
-            {% endif %}
-            {% endif %}
-            {% endfor %}
-        </div>
-        <div class="col m-3 mt-1 w-25">
+    <center>
+        <div class="container w-75 mt-1 shadow p-3 mb-5 bg-white rounded">
+            <h4>Compila i campi sottostanti</h4>
+            <form action="/contatto" method="post" class="w-50">
             <br>
-            <center>
-                <h4>
-                    Notizie Locali
-                </h4>
-            </center>
             <br>
-            {% set k = namespace(value=0) %}
-            {% for article in locali['articles'] %}
-            {% set k.value = k.value+1 %}
-            {% if k.value|int <= 7 %} <div class="newsdx">
-                <img src="{{article['urlToImage']}}" class="newsimgdx" class="mt-3">
-                <div style="display:block;">
-                    <a href="{{article['url']}}">
-                        <h6 class="newstitle">{{article['title']}}</h6>
-                        <p class="newstitle">{{article['publishedAt']|format_datetime}}</p>
-                    </a>
-                </div>
+            Oggetto
+            <br>
+            <input class="form-control" type="text" placeholder="Oggetto">
+            <br>
+            <br>
+            Testo
+            <br>
+            <div class="form-group">
+                <label for="exampleFormControlTextarea1"></label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" placeholder="Scrivi..." rows="3"></textarea>
+              </div>
+            <br>
+            <button type="submit">Invia</button>
         </div>
-        {% endif %}
-        {% endfor %}
-    </div>
-    </div>
-    </div>
-    <div
-        class="container d-flex flex-column justify-content-center align-items-center mt-3 shadow p-3 mb-4 bg-white rounded">
-        <h4>Notizie Sport</h4>
-        <br>
-        <div id="carouselExampleControls" class="carousel slide d-flex flex-row justify-content-center"
-            data-bs-ride="carousel">
-            <div class="carousel-inner">
-                {% set k = namespace(value=0) %}
-                {% for article in sport['articles'] %}
-                {% set k.value = k.value+1 %}
-                {% if k.value|int <= 3 %} <div class="carousel-item {%if loop.index == 1%}active{%endif%}">
-                    <img src="{{article['urlToImage']}}" class="d-block" style="width: 500px;height: 300px;" alt="...">
-                    <div class="carousel-caption d-none d-md-block" style="background-color:rgba(0, 0, 0, 0.7);">
-                        {{article['title']}}</div>
-            </div>
-            {%endif%}
-            {%endfor%}
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
-            data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Precedente</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
-            data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Successiva</span>
-        </button>
-    </div>
-    </div>
+    </form>
+    </center>
+
     <br>
     <div class="container d-flex justify-content-between footer1 shadow p-3 bg-white rounded" >
         <div class="p-2" style="width:33%;">

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css')
+            }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='stilelogin.css')
+        }}">
+    <link href="https://fonts.cdnfonts.com/css/cooper-hewitt" rel="stylesheet">
+    <title>Notitia</title>
+</head>
+
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
+        integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
+        crossorigin="anonymous"></script>
+    <script type="text/javascript" src="carousel.js"></script>
+
+
+    <div class="w-100 d-flex flex-column shadow p-2 mb-4 bg-white rounded">
+        <div class="d-flex flex-row justify-content-between align-items-center">
+            <div class="float-start" style="width: 33%;">
+                <a href="/">
+                    <img src="{{url_for('static',
+                    filename='img/logo.png')}}" width="240" height="170" />
+                </a>
+            </div>
+            <div style="width: 33%;">
+                <center>
+                    <form action="/search" method="post">
+                        <input type="search" class="form-control
+                            rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon"
+                            id="search" name="search" />
+                    </form>
+                </center>
+            </div>
+            <div class="d-flex flex-row-reverse" style="width: 33%;">
+                <a href="account">
+                    {% if email is none %}
+                    <a class="btn btn-dark" href="/account?name=signup" role="button">Registrati</a>
+                    <a class="btn btn-dark" href="/account?name=signin" role="button">Accedi</a>
+                    {% endif %}
+                    {%if email is not none%}
+                    <img src="{{url_for('static',
+                    filename='img/account.png')}}" style="width: 40px; height: 40px;">
+                    {%endif%}
+                </a>
+            </div>
+        </div>
+        <br>
+        <div class="d-flex flex-row justify-content-center mt-1">
+
+            <div class=""><b>
+                <h5 class="mr-2" style="text-decoration: none;">
+                    <a href="category?category=business">Business</a>
+                    <a href="category?category=science">Scienza</a>
+                    <a href="category?category=sports">Sport</a>
+                    <a href="category?category=technology">Tecnologia</a>
+                    <a href="category?category=entertainment">Intrattenimento</a>
+                    <a href="category?category=general">Generali</a>
+                    <a href="/heads">Prime Pagine</a>
+                    <a href="/ournews">I Nostri Articoli</a>
+                </b>
+                </h5>
+            </div>
+
+        </div>
+    </div>
+            <div class="container mt-1 shadow p-3 mb-5 bg-white rounded" style="width:87%;">
+                {% if m is not none %}
+                    <p style="color:red">{{m}}</p>
+                {% endif %}
+                {%for article in ourarticles['articles']%}
+                <div class="news">
+                    <img src="{{article['urlToImage']}}" style="width: 390px;height: 320px;" alt="Your Image" class="newsimg">
+                    <div style="display:block;" class="m-3">
+                        <a href="{{article['url']}}">
+                            <h5 class="newstitle">{{article['title']}}</h5>
+                            <h6 class="newstitle">{{article['description']}}</h6>
+                            <p class="newstitle">{{article['publishedAt']}}</p>
+                        </a>
+                        <div class="d-flex flex-row">
+                            <div class="p-2">
+                            <a href="delete?id={{article['id']}}">
+                                <img src="{{url_for('static',filename='img/bin.png')}}" alt="" style="width: 30px; height: 30px">
+                                <br><br>
+                            </a>
+                            </div>
+                            <div class="p-2">
+                                <a href="formedit?id={{article['id']}}&title={{article['title']}}&description={{article['description']}}&url={{article['url']}}&urlToImage={{article['urlToImage']}}&publishedAt={{article['publishedAt']}}">
+                                    <img src="{{url_for('static',filename='img/edit.png')}}" alt="" style="width: 30px; height: 30px">
+                                    <br><br>
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                {%endfor%}
+                <br>
+                <div class="container d-grid gap-2">
+                    <a class="container btn btn-outline-secondary" href="/formadd" role="button">Aggiungi Articoli</a>
+                </div>
+            </div>
+        <br>
+        <br>
+        <div class="container d-flex justify-content-between footer1 shadow p-3 bg-white rounded" >
+            <div class="p-2" style="width:33%;">
+                <h4 class="text-dark">
+                    Chi siamo
+                </h4>
+                <br>
+                <p class="text-dark">
+                    Notitia è un team composto da studenti che lavora per fornire informazioni e notizie gratuite da qualsiasi fonte
+                    in maniera chiara e senza intromettersi tra chi scrive e chi legge.
+                </p>
+            </div>
+    
+            <div class="p-2" style="width:33%;">
+                <h4 class="text-dark">Link Utili</h4><br>
+                <a href="/contatto" class="text-dark">
+                    Contattaci
+                </a>
+            </div>
+    
+            <div class="p-2" style="width:33%;">
+                <h4 class="text-dark">Sede</h4><br>
+                <p class="text-dark">
+                    Polo Manetti Porciatti
+                    <br>
+                    Via Brigate Partigiane
+                    <br>
+                    Grosseto,GR,IT
+                </p>
+            </div>
+    
+        </div>
+    </body>
+</html>

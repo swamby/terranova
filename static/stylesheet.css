@@ -1,0 +1,9 @@
+
+@font-face {
+    font-family: 'onefifthblack';
+    src: url('onefifth-black-webfont.woff2') format('woff2'),
+         url('onefifth-black-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
